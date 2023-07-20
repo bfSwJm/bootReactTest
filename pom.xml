@@ -43,6 +43,12 @@
 			<artifactId>jstl</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<optional>true</optional>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -50,14 +56,77 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>com.github.eirslett</groupId>
+				<artifactId>frontend-maven-plugin</artifactId>
+				<version>1.7.6</version>
+
+				<executions>
+					<execution>
+						<id>Install node and npm</id>
+						<goals>
+							<goal>install-node-and-npm</goal>
+						</goals>
+						<phase>generate-resources</phase>
+						<configuration>
+							<nodeVersion>v18.17.0</nodeVersion>
+							<npmVersion>9.6.7</npmVersion>
+						</configuration>
+					</execution>
+
+					<execution>
+						<id>npm install</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<phase>generate-resources</phase>
+						<configuration>
+							<arguments>install</arguments>
+						</configuration>
+					</execution>
+
+					<execution>
+						<id>npm build</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<phase>generate-resources</phase>
+						<configuration>
+							<arguments>run build</arguments>
+						</configuration>
+					</execution>
+				</executions>
 				<configuration>
-					<excludes>
-						<exclude>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</exclude>
-					</excludes>
+					<nodeVersion>v18.17.0</nodeVersion>
+					<workingDirectory>src/main/front</workingDirectory>
 				</configuration>
+
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.1.0</version>
+				<executions>
+					<execution>
+						<id>Copy my react app into my Spring Boot target static folder</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>target/classes/static</outputDirectory>
+							<resources>
+								<resource>
+									<directory>src/main/front/build</directory>
+									<filtering>true</filtering>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
