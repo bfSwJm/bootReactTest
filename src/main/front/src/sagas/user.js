@@ -7,7 +7,7 @@ import {
 } from "../reducers/user";
 
 function getTestAPI(data) {
-  return axios.get("");
+  return axios.get(`/userdata?userid=${data}`);
 }
 
 function* getTest(action) {

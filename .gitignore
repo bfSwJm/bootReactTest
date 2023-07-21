@@ -40,4 +40,5 @@ src/main/front/.env
 src/main/front/node/.next
 .env
 .next
+/.next
 exam/

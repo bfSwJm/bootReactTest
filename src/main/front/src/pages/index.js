@@ -8,6 +8,7 @@ const index = () => {
   useEffect(() => {
     dispatch({
       type: GET_TEST_APT_REQUEST,
+      data: "jm91",
     });
   }, []);
   return (
