@@ -24,3 +24,5 @@ yarn-error.log*
 .env
 .next
 /.next
+/src/node
+/src/node_modules
