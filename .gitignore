@@ -36,4 +36,8 @@ src/main/front/node
 src/main/front/node/node_modules
 src/main/front/node_modules
 src/main/front/package-lock.json
+src/main/front/.env
+src/main/front/node/.next
+.env
+.next
 exam/
